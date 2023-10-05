@@ -14,7 +14,19 @@ import { MatCardModule } from '@angular/material/card';
 
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
+import { MSAL_INSTANCE } from '@azure/msal-angular';
+import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
 
+
+function MsalInstanceFactory(): IPublicClientApplication{
+    return new PublicClientApplication({
+        auth: {
+            clientId: 'e5d0c32d-431e-4aaf-9c30-90b0a088e3af',
+            authority: 'https://login.microsoftonline.com/88ec1aaa-2567-4903-a844-323214135e1e',
+            redirectUri: '/auth',
+        }
+    });
+}
 @NgModule({
     declarations: [
         AppComponent,
@@ -32,7 +44,12 @@ import { ProfileComponent } from './profile/profile.component';
         MatMenuModule,
         MatCardModule
     ],
-    providers: [],
+    providers: [
+        {
+            provide: MSAL_INSTANCE,
+            useFactory: MsalInstanceFactory
+        }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
