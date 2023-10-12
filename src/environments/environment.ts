@@ -3,7 +3,19 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-    production: false
+    production: false,
+    azure: {
+        instance: "https://login.microsoftonline.com/",
+        tenantId: "88ec1aaa-2567-4903-a844-323214135e1e",
+        clientId: "e5d0c32d-431e-4aaf-9c30-90b0a088e3af",
+        scopes: [
+          {
+            key: "https://graph.microsoft.com/v1.0/me",
+            value: ["user.read"]
+          }
+        ],
+        redirectUri: "/auth"
+      },
 };
 
 /*

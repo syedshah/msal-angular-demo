@@ -11,7 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
-
+import { environment } from '../environments/environment'
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MSAL_GUARD_CONFIG, MSAL_INSTANCE, MSAL_INTERCEPTOR_CONFIG, MsalBroadcastService, MsalGuard, MsalGuardConfiguration, MsalInterceptor, MsalInterceptorConfiguration, MsalRedirectComponent, MsalService, ProtectedResourceScopes } from '@azure/msal-angular';
@@ -21,9 +21,9 @@ import { IPublicClientApplication, InteractionType, LogLevel, PublicClientApplic
 function MsalInstanceFactory(): IPublicClientApplication{
     return new PublicClientApplication({
         auth: {
-            clientId: 'e5d0c32d-431e-4aaf-9c30-90b0a088e3af',
-            authority: 'https://login.microsoftonline.com/88ec1aaa-2567-4903-a844-323214135e1e',
-            redirectUri: '/auth',
+            clientId: environment.azure.clientId,
+            authority: `${environment.azure.instance}${environment.azure.tenantId}`,
+            redirectUri: environment.azure.redirectUri,
         },
         cache: {
             cacheLocation: 'sessionStorage',
